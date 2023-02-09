@@ -1,0 +1,37 @@
+.custom-classname {
+  gap: 5px;
+  max-width: 200px;
+  width: 100%;
+}
+
+.custom-classname .rr--svg {
+  padding: 5px;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 4px;
+}
+
+.custom-classname .rr--on .rr--svg {
+  fill: MediumSeaGreen;
+  background: MintCream;
+  border-color: MediumSeaGreen;
+}
+
+.custom-classname .rr--off .rr--svg {
+  fill: Tomato;
+  background: AntiqueWhite;
+  border-color: Tomato;
+}
+
+@media (min-width: 610px) {
+  .custom-classname {
+    max-width: 300px;
+    gap: 10px;
+  }
+
+  .custom-classname .rr--svg {
+    padding: 10px;
+    border-width: 2px;
+    border-radius: 10px;
+  }
+}
