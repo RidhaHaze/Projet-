@@ -36,7 +36,7 @@ exports.login = catchAsync(async (req, res, next) => {
 
   if (!email || !password) {
     return res.status(400).json({
-      status: "success",
+      status: "fail",
       message: "Please provide email and password",
     });
   }
@@ -46,7 +46,7 @@ exports.login = catchAsync(async (req, res, next) => {
 
   if (!correct || !user) {
     return res.status(401).json({
-      status: "success",
+      status: "fail",
       message: "Incorrect email or password",
     });
   }
@@ -64,7 +64,7 @@ exports.protect = catchAsync(async (req, res, next) => {
 
   if (!token) {
     return res.status(401).json({
-      status: "success",
+      status: "fail",
       message: "You are not logged in! Please log in to get access",
     });
   }
@@ -76,7 +76,7 @@ exports.protect = catchAsync(async (req, res, next) => {
 
   if (!user) {
     return res.status(401).json({
-      status: "success",
+      status: "fail",
       message: "The user belonging to this token does no longer exist.",
     });
   }
@@ -86,24 +86,36 @@ exports.protect = catchAsync(async (req, res, next) => {
   next();
 });
 
-exports.current = async (req, res, next) => {
+exports.current = catchAsync(async (req, res, next) => {
   // 1) Get token and chack if it's exist
   const { authorization } = req.headers;
   let token;
+
   if (authorization && authorization.startsWith("Bearer")) {
     token = authorization.split(" ")[1];
   }
+
   if (!token) {
-    return;
+    return res.status(200).json({
+      status: "success",
+    });
   }
 
   // 2) Verivication token
-  const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
-  // 3) Check if user still exists
+  const decoded = jwt.verify(token, process.env.JWT_SECRET);
+
+  if (!decoded) {
+    return res.status(200).json({
+      status: "success",
+    });
+  }
+  // // 3) Check if user still exists
   const user = await User.findById(decoded.id);
 
   if (!user) {
-    return;
+    return res.status(200).json({
+      status: "success",
+    });
   }
   res.status(200).json({
     status: "success",
@@ -112,14 +124,14 @@ exports.current = async (req, res, next) => {
       user,
     },
   });
-};
+});
 
 exports.restrictTo =
   (...roles) =>
   (req, res, next) => {
     if (!roles.includes(req.user.role)) {
       return res.status(403).json({
-        status: "success",
+        status: "fail",
         message: "You do not have permission to perform this action",
       });
     }

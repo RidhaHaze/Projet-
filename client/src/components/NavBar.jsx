@@ -3,7 +3,6 @@ import { Navbar, Container, ButtonGroup } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { logout } from "../redux/actions/userActions";
-import Search from "./Search";
 
 function NavBar() {
   const user = useSelector((state) => state.userReducer.user);
@@ -11,6 +10,7 @@ function NavBar() {
 
   const handleClick = () => {
     dispatch(logout());
+    window.location.reload(false);
   };
   return (
     <Navbar bg="dark" variant="dark">

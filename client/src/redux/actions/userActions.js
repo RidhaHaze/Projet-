@@ -38,7 +38,9 @@ export const current = () => async (dispatch) => {
   try {
     const config = {
       headers: {
-        authorization: `Bearer ${localStorage.getItem("token")}`,
+        authorization: localStorage.getItem("token")
+          ? `Bearer ${localStorage.getItem("token")}`
+          : undefined,
       },
     };
 
@@ -61,7 +63,7 @@ export const videErrors = () => {
     type: VIDE_ERRORS,
   };
 };
-export const update = (user, id, navigate) => async (dispatch) => {
+export const update = (user, id) => async (dispatch) => {
   dispatch({ type: LOAD_USER });
   try {
     const formData = new FormData();
@@ -80,7 +82,6 @@ export const update = (user, id, navigate) => async (dispatch) => {
     };
     const resulte = await axios.put("/api/users/" + id, formData, config);
     dispatch({ type: UPDATE_USER, payload: resulte.data }); //{user,msg}
-    navigate("/" + id);
   } catch (error) {
     console.log(error);
   }

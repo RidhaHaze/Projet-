@@ -1,12 +1,10 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import { update } from "../redux/actions/userActions";
 import Input from "./Input";
 
 export default function CompletInfo() {
   const [user, setUser] = useState({});
-  const navigate = useNavigate();
   const data = useSelector((state) => state.userReducer.user);
   const dispatch = useDispatch();
   const handlechange = (e) => {
@@ -18,7 +16,8 @@ export default function CompletInfo() {
   const handleClick = (e) => {
     e.preventDefault();
     console.log(user);
-    dispatch(update(user, data?._id, navigate));
+    dispatch(update(user, data?._id));
+    window.location.reload(false);
   };
   return (
     <>

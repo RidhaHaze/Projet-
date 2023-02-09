@@ -4,12 +4,10 @@ import Offcanvas from "react-bootstrap/Offcanvas";
 import Input from "./Input";
 import { useDispatch, useSelector } from "react-redux";
 import { update } from "../redux/actions/userActions";
-import { useNavigate } from "react-router-dom";
 
 export default function EditDrawer() {
   const data = useSelector((state) => state.userReducer.user);
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   const [show, setShow] = useState(false);
   const [user, setUser] = useState(data);
@@ -23,7 +21,9 @@ export default function EditDrawer() {
   };
   const handleClick = (e) => {
     e.preventDefault();
-    dispatch(update(user, data?._id, navigate));
+    dispatch(update(user, data?._id, window.location.reload));
+    window.location.reload(false);
+
     handleClose();
   };
   return (

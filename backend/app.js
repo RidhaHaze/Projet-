@@ -1,7 +1,9 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const connectDB = require("./config/connection");
-const globalErrorHandler = require("./controllers/errorController");
+// const globalErrorHandler = require("./controllers/errorController");
+const cors = require("cors");
+
 const app = express();
 
 mongoose.set("strictQuery", true);
@@ -9,6 +11,7 @@ mongoose.set("strictQuery", true);
 connectDB();
 //mi
 app.use(express.json());
+app.use(cors());
 
 app.use("/api/users", require("./routes/User"));
 

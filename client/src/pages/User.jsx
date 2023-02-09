@@ -10,7 +10,7 @@ import NotFound from "./NotFound";
 export default function User() {
   const user = useSelector((state) => state.userReducer.user);
   const { id } = useParams();
-  if (user._id !== id) {
+  if (user?._id !== id) {
     return <NotFound />;
   }
 
@@ -36,7 +36,7 @@ export default function User() {
           </div>
           <div>
             <EditDrawer />
-            <DeleteButton id={user._id} />
+            <DeleteButton id={user?._id} />
           </div>
         </div>
         <h6>{user.info.bio}</h6>
