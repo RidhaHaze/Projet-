@@ -30,24 +30,24 @@ const upload = multer({
 
 exports.uploadUserPhoto = upload.single("photo");
 
-exports.addUser = async (req, res) => {
-  const { name, email, age } = req.body;
-  try {
-    const found = await User.findOne({ email });
-    if (found) {
-      return res.status(400).send("User already exists!!");
-    }
-    const user = new User({
-      name,
-      email,
-      age,
-    });
-    await user.save();
-    res.status(201).send({ msg: "User created", user });
-  } catch (error) {
-    res.status(500).send("server error");
-  }
-};
+// exports.addUser = async (req, res) => {
+//   const { name, email, age } = req.body;
+//   try {
+//     const found = await User.findOne({ email });
+//     if (found) {
+//       return res.status(400).send("User already exists!!");
+//     }
+//     const user = new User({
+//       name,
+//       email,
+//       age,
+//     });
+//     await user.save();
+//     res.status(201).send({ msg: "User created", user });
+//   } catch (error) {
+//     res.status(500).send("server error");
+//   }
+// };
 
 exports.getAllUsers = async (req, res) => {
   try {

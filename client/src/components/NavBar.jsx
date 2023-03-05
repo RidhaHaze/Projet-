@@ -16,7 +16,7 @@ function NavBar() {
     <Navbar bg="dark" variant="dark">
       <Container className="">
         <Navbar.Brand as={Link} to="/">
-          Web7arka
+          Sahali 
         </Navbar.Brand>
         <div></div>
         {user?.photo ? (

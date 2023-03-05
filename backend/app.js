@@ -1,7 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const connectDB = require("./config/connection");
-// const globalErrorHandler = require("./controllers/errorController");
+const globalErrorHandler = require("./controllers/errorController");
 const cors = require("cors");
 
 const app = express();
@@ -23,7 +23,7 @@ app.all("*", (req, res, next) => {
   });
 });
 
-// app.use(globalErrorHandler);
+app.use(globalErrorHandler);
 
 const port = 5000;
 app.listen(port, () => console.log(`server started on port ${port}`));

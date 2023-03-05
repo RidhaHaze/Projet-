@@ -18,7 +18,7 @@ router
 
 // Restrict to admin
 router.route("/:id").delete(userController.deleteUser);
-router.route("/").post(userController.addUser);
+// router.route("/").post(userController.addUser);
 router.use(authController.restrictTo("admin"));
 
 module.exports = router;

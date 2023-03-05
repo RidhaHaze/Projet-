@@ -51,7 +51,7 @@ export default function User() {
               alt="avatar"
             />
             <div className="d-grid flex-column">
-              <span className="">Seif Allah</span>
+              <span className="">Sahali</span>
               <Rate readOnly={true} />
             </div>
           </div>

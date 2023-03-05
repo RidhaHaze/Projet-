@@ -41,6 +41,8 @@ const userSchema = new Schema({
   },
 });
 
+
+// middleware run before save or create
 userSchema.pre("save", async function (next) {
   // Only run this function if password is actually modified
   if (!this.isModified("password")) return next();

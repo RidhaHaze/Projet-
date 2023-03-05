@@ -20,12 +20,12 @@ export default function UserCard({ readOnly, user }) {
               {user?.first_name} {user?.last_name}
             </span>
             <span className="text-black-50">{user?.info?.skill}</span>
-            <Rate readOnly={true} />
+            <Rate readOnly={false} />
           </div>
         </div>
         <h6>{user?.info?.bio}</h6>
         <div className="d-flex justify-content-between install mt-3">
-          <span>Vote 172 times</span>
+          <span>More Info</span>
           <button
             className="btn btn-outline-primary"
             onClick={() => setModalShow(true)}
